@@ -39,14 +39,15 @@ class VuePage
      * @param void
      * @return void
      */
-    public function getNav(){
+    public function getNav()
+    {
         $sHtml = "
         <nav>
             <span><i class='fas fa-bars'></i></span>
             <ul>
                 <li class='actif'><a href='#'><i class='fas fa-home'></i></a></li>
-                <li><a href='#'><i class='far fa-calendar-plus'></i></a></li>
-                <li><a href='#'><i class='fas fa-tasks'></i></a></li>
+                <li id='btnCreerEvenement'><a href='#'><i class='far fa-calendar-plus'></i></a></li>
+                <li id='btnCreerTache'><a href='#'><i class='fas fa-tasks'></i></a></li>
             </ul>
             <div>
                 <a href='#'><i class='fas fa-heart'></i></a>
@@ -57,8 +58,8 @@ class VuePage
 
         echo $sHtml;
     }
-    
-    
+
+
     /**
      * Affichage de la fin de la page HTML
      * @param void

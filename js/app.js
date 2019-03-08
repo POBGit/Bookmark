@@ -19,10 +19,11 @@ let oAjoutSite = document.getElementById("ajoutSite"),
     modalEvent = document.getElementById("modalEvent"),
     btnAjoutEvent = document.querySelectorAll("nav ul li a")[1],
     btnAjoutTache = document.querySelectorAll("nav ul li a")[2],
+
     modalTache = document.getElementById('modalTodo'),
 
     // Variables du temps
-    elmTemps = document.querySelector('#horloge h2'),
+    elmTemps = document.querySelector('.displayTemps'),
 
     // Classes
     interaction = new class {},
