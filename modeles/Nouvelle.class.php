@@ -78,5 +78,4 @@ class Nouvelle {
         return $aoNouvelles;
     }
 
-
 } // fin classe
