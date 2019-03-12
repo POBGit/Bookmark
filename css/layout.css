@@ -9,7 +9,7 @@ body {
 
 /* === NAV === */
 nav {
-    background-color: var(--blanc);
+    background-color: var(--bg-color-box);
     width: 75px;
     border-right: 2px solid var(--border-nav);
     position: relative;
@@ -29,7 +29,7 @@ nav ul {
 }
 
 nav ul li {
-    border-left: 3px solid var(--blanc);
+    border-left: 3px solid var(--bg-color-box);
 }
 
 nav ul li a {
@@ -82,7 +82,7 @@ nav>div>p {
 
 nav>div>p a {
     text-decoration: none;
-    border-bottom: 1px solid var(--blanc);
+    border-bottom: 1px solid var(--bg-color-box);
     padding-bottom: 2px;
     transition: border 0.3s ease-in-out;
 }
@@ -102,7 +102,7 @@ main {
 
 /* === HEADER === */
 header {
-    background-color: var(--blanc);
+    background-color: var(--bg-color-box);
     height: 75px;
     align-items: center;
 }
@@ -128,6 +128,7 @@ header #search input[type=text] {
     font-size: 1em;
     font-weight: 700;
     color: var(--main-texte-gris-1);
+    background-color: var(--bg-color-box);
 }
 
 header #user {
@@ -180,7 +181,7 @@ header #settings a {
 .row:nth-of-type(n+2)>div:not(.column) {
     display: flex;
     flex-flow: column nowrap;
-    background-color: var(--blanc);
+    background-color: var(--bg-color-box);
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.2);
     flex: 1 1 0;
     margin-right: 35px;
@@ -191,6 +192,11 @@ header #settings a {
 .row:nth-of-type(n+2)>div h2 {
     font-size: 18px;
     margin-bottom: 10px;
+    color: var(--main-texte-gris-h2);
+}
+
+.row:nth-of-type(n+2)>div p{
+    color: var(--main-texte-gris-h2);
 }
 
 .row>div:last-of-type {
@@ -202,7 +208,7 @@ header #settings a {
 }
 
 .row .column>div {
-    background-color: var(--blanc);
+    background-color: var(--bg-color-box);
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.2);
     flex: 1 1 0;
     margin-right: 35px;
@@ -311,28 +317,8 @@ header #settings a {
 }
 
 /* === HORLOGE === */
-#horloge {
-    background-position: center;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    text-align: center;
-}
-
-
 .displayTemps {
     color: var(--main-texte-gris-sous-titre);
-}
-
-#horloge h2 {
-    /* font-size: 2.5em;
-    font-weight: 900;
-    color: var(--blanc);
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2); */
-}
-
-#horloge h2>span {
-    color: var(--main-texte-gris-pale);
 }
 
 /* === METEO === */
@@ -491,6 +477,8 @@ header #settings a {
     margin-bottom: 10px;
     font-size: 15px;
     transition: border 0.3s ease-in-out;
+    background-color: var(--bg-color-box);
+    color: var(--main-texte-gris-h2);
 }
 
 #calculatrice input:focus {

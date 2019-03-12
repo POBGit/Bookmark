@@ -15,8 +15,11 @@ body {
 }
 
 /* === VARIABLES DE COULEURS === */
-:root {
-    --bg-color: #F4F7FC;
+:root{
+
+    --bg-color: #F4F7FC; /* Background de la page */
+    --bg-color-box: #FFF; /* Background des box */
+    --border-nav: #ebecf1; /* Background */
 
     --main-bleu-fonce: #0285FF;
     --main-vert-fonce: #33C635;
@@ -29,11 +32,8 @@ body {
     --main-texte-gris-2: #7E8390;
     --main-texte-gris-pale: #CACED8;
     --main-texte-gris-h2: #282828;
+    --main-texte-gris-p: #282828;
     --main-texte-gris-sous-titre: #9399AD;
-
-
-    --blanc: #FFF;
-    --border-nav: #ebecf1;
 
     /* Couleurs Alertes */
     --alerte-vert-fonce: #2FD573;
@@ -42,6 +42,16 @@ body {
     --alerte-jaune-pale: #FFDB9B;
     --alerte-rouge-fonce: #FF4858;
     --alerte-rouge-pale: #FFE0E3;
+}
+
+/* === VARIABLES DE COULEURS DU DARK MODE === */
+.dark {
+    --bg-color: #1E1F21; /* Background de la page */
+    --bg-color-box: #2D3139; /* Background des box */
+    --border-nav: #1d2129;
+
+    --main-texte-gris-h2: #FFF;
+    --main-texte-gris-p: #e0e0e0;
 }
 
 /* === CLASSES GLOBALES === */

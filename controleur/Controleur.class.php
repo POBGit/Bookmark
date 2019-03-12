@@ -77,14 +77,8 @@ class Controleur
             // Nouvelles
             $this->gererAfficherNouvelle();
 
-            /* ========================================================================================== */
-
-            echo "<div class='column'>";
-
             // Calculatrice
             $this->gererAfficherCalculatrice();
-
-            echo "</div>";
 
             /* ========================================================================================== */
 
@@ -261,7 +255,11 @@ class Controleur
         try {
             $oNouvelle = new Nouvelle();
             $oVueNouvelle = new VueNouvelle();
-            $oVueNouvelle->afficherTousNouvelles($oNouvelle);
+            $aoNouvelles = $oNouvelle->rechercherActualite();
+
+            //$aoNouvelles = array();
+
+            $oVueNouvelle->afficherTousNouvelles($aoNouvelles);
         } catch (Exception $oException) {
             echo "<p>" . $oException->getMessage() . "</p>";
         }
