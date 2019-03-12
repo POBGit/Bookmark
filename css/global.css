@@ -1,0 +1,70 @@
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* === FONT === */
+body {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* === VARIABLES DE COULEURS === */
+:root{
+
+    --bg-color: #F4F7FC; /* Background de la page */
+    --bg-color-box: #FFF; /* Background des box */
+    --border-nav: #ebecf1; /* Background */
+
+    --main-bleu-fonce: #0285FF;
+    --main-vert-fonce: #33C635;
+    --main-rouge-fonce: #F12B2C;
+    --main-mauve-fonce: #886CFF;
+
+    --main-bleu-pale: #E5F3FF;
+
+    --main-texte-gris-1: #BCC1CE;
+    --main-texte-gris-2: #7E8390;
+    --main-texte-gris-pale: #CACED8;
+    --main-texte-gris-h2: #282828;
+    --main-texte-gris-p: #282828;
+    --main-texte-gris-sous-titre: #9399AD;
+
+    /* Couleurs Alertes */
+    --alerte-vert-fonce: #2FD573;
+    --alerte-vert-pale: #C3F3D7;
+    --alerte-jaune-fonce: #FFA503;
+    --alerte-jaune-pale: #FFDB9B;
+    --alerte-rouge-fonce: #FF4858;
+    --alerte-rouge-pale: #FFE0E3;
+}
+
+/* === VARIABLES DE COULEURS DU DARK MODE === */
+.dark {
+    --bg-color: #1E1F21; /* Background de la page */
+    --bg-color-box: #2D3139; /* Background des box */
+    --border-nav: #1d2129;
+
+    --main-texte-gris-h2: #FFF;
+    --main-texte-gris-p: #e0e0e0;
+}
+
+/* === CLASSES GLOBALES === */
+.flex-container {
+    display: flex;
+}
+
+.row {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.column {
+    display: flex;
+    flex-flow: column nowrap;
+}
