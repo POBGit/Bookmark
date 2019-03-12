@@ -255,9 +255,9 @@ class Controleur
         try {
             $oNouvelle = new Nouvelle();
             $oVueNouvelle = new VueNouvelle();
-            $aoNouvelles = $oNouvelle->rechercherActualite();
+            //$aoNouvelles = $oNouvelle->rechercherActualite();
 
-            //$aoNouvelles = array();
+            $aoNouvelles = array();
 
             $oVueNouvelle->afficherTousNouvelles($aoNouvelles);
         } catch (Exception $oException) {
