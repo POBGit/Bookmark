@@ -504,4 +504,5 @@ class Utilisateur {
         $oPDOLib->fermerLaConnexion();
         return false;
     } // fin ()
+
 } // fin classe
