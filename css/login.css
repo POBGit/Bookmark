@@ -1,0 +1,121 @@
+body {
+    background: linear-gradient(to right, #01a2ba, #0273B0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contenu {
+    width: 80%;
+    height: 70%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+#contenu > div:first-of-type {
+    width: 25%;
+    background: linear-gradient(45deg, #0587a3, #045497);
+    padding: 25px;
+    flex-flow: column nowrap;
+    height: 100%;
+}
+
+#contenu > div:first-of-type h1 {
+    color: #FFF;
+    text-align: center;
+}
+
+#contenu > div:first-of-type > div {
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+}
+
+#contenu > div:first-of-type > div img {
+    display: block;
+    width: 100%;
+}
+
+#contenu > div:first-of-type p {
+    color: #EEE;
+    font-size: 12px;
+    text-align: center;
+}
+
+#contenu > div:first-of-type a {
+    color: #EEE;
+}
+
+#contenu > div:last-of-type {
+    background-color: #fafbfc;
+    flex: 1 1 0;
+    padding: 25px;
+    flex-flow: column nowrap;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#contenu > div:last-of-type > div {
+    width: 70%;
+    margin: 75px 0;
+}
+
+#contenu > div:last-of-type h2 {
+    font-size: 2.5em;
+}
+
+#contenu > div:last-of-type > p {
+    text-align: right;
+    align-self: flex-end;
+    color: #282828;
+}
+
+#contenu > div:last-of-type > p a {
+    color: #6C96E7;
+}
+
+#contenu > div:last-of-type > div p {
+    color: #a7a3af;
+    margin-bottom: 35px;
+}
+.input-texte{
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.input-texte label{
+    color: #157fbf;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.input-texte input[type=email],
+.input-texte input[type=password]{
+    border: none;
+    border-bottom: 2px solid #CCC;
+    padding: 10px 0;
+    background-color: transparent;
+    color: #282828;
+    font-size: 15px;
+    transition: border-bottom-color 0.3s ease-in-out;
+}
+.input-texte input[type=email]:focus,
+.input-texte input[type=password]:focus{
+    border-bottom-color: #157fbf;
+}
+
+.input-check {
+    margin: 25px 0;
+}
+
+form input[type=submit]{
+    background: linear-gradient(-45deg, #0587a3, #045497);
+    padding: 10px 35px;
+    border-radius: 50px;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+}
