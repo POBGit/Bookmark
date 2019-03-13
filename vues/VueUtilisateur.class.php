@@ -26,7 +26,7 @@ class VueUtilisateur {
                 </div>
                 <div id='user' class='flex-container'>
                     <p>" . $oUtilisateur->getsPrenom() . " " . substr($oUtilisateur->getsNom(), 0, 1) . ".</p>
-                    <img src='medias/" . $oUtilisateur->getsAvatar() . "' alt=''>
+                    <img src='medias/avatar/" . $oUtilisateur->getsAvatar() . "' alt=''>
                 </div>
                 <div id='settings'>
                     <a href='setting.php'><i class='fas fa-cog'></i></a>
@@ -44,8 +44,7 @@ class VueUtilisateur {
     public function adm_afficherProfil(Utilisateur $oUtilisateur, $sMsg = "") {
 
         $aLangue = array(
-            array("sNomLangue" => "Français", "sValeur" => "fr"),
-            array("sNomLangue" => "Anglais", "sValeur" => "en")
+            array("sNomLangue" => "Français", "sValeur" => "fr")
         );
         $aTheme = array(
             array("sNomTheme" => "Automatique", "sValeur" => "auto"),
@@ -70,7 +69,7 @@ class VueUtilisateur {
         }
 
         $sHtml .= "
-        <form action='setting.php' method='post'>
+        <form action='setting.php' method='post' enctype='multipart/form-data'>
     
             <div id='langue'>
                 <div>
@@ -162,8 +161,8 @@ class VueUtilisateur {
                 </div>
                 <div>
                     <div id='imgProfil'>
-                        <img src='medias/" . $oUtilisateur->getsAvatar() . "' alt=''>
-                        <input type='file' name='sAvatar' id='sAvatar'>
+                        <img src='medias/avatar/" . $oUtilisateur->getsAvatar() . "' alt=''>
+                        <input type='file' name='sAvatar' id='sAvatar' accept='.png,.jpg,.jpeg'>
                     </div>
                     
                     <div>
@@ -188,6 +187,7 @@ class VueUtilisateur {
     
             <input type='submit' name='cmd' value='Sauvegarder'>
         </form>
+        <script src='js/reglages.js'></script>
         ";
 
         echo $sHtml;

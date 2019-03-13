@@ -505,4 +505,43 @@ class Utilisateur {
         return false;
     } // fin ()
 
+
+    public function televerserPhoto() {
+        $target_dir = "medias/avatar/";
+        $sAvatar =  basename($_FILES["sAvatar"]["name"]);
+        $target_file = $target_dir . $sAvatar;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($_FILES["sAvatar"]["tmp_name"]);
+
+        if ($check == false) {
+            return array("erreur" => true, "sInfo" =>  "Erreur : Le fichier n'est pas une image!");
+        }
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $sAvatar = time() ."_". $sAvatar;
+            $target_file = $target_dir . $sAvatar;
+        }
+
+        // Check file size
+        // max 10 Mo
+        if ($_FILES["sAvatar"]["size"] > 1000000) {
+            return array("erreur" => true, "sInfo" => "Erreur : Le fichier est trop volumineux (Max: 1 Mo)!");
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            return array("erreur" => true, "sInfo" => "Erreur : Seulement les fichiers .jpg, .png et .jpeg sont acceptés!");
+        }
+
+        if (move_uploaded_file($_FILES["sAvatar"]["tmp_name"], $target_file)) {
+            return array("erreur" => false, "sInfo" => $sAvatar);
+        } else {
+            return array("erreur" => true, "sInfo" => "Erreur lors du transfert!");
+        }
+    }
+
+
 } // fin classe

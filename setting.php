@@ -63,44 +63,61 @@ spl_autoload_register('autoload');
     try{
         $oVueUtilisateur = new VueUtilisateur();
         $oUtilisateur = new Utilisateur(1);
+        $oUtilisateur->rechercherUn();
+        $sAlerte = "";
         $sMsg = "";
 
         if(isset($_POST['cmd']) == false){
-            $oUtilisateur->rechercherUn();
-
             $oVueUtilisateur->adm_afficherProfil($oUtilisateur);
         }
         else{
-            $oUtilisateur = new Utilisateur(
-                    1,
-                $_POST['sNom'],
-                $_POST['sPrenom'],
-                $_POST['sCourriel'],
-                $_POST['sMotDePasse'],
-                $_POST['sAvatar'],
-                "",
-                $_POST['sLangue'],
-                $_POST['sTheme'],
-                $_POST['sMoteurRecherche'],
-                $_POST['sSources']
-            );
+
+            $oUtilisateur->setsNom($_POST['sNom']);
+            $oUtilisateur->setsPrenom($_POST['sPrenom']);
+            $oUtilisateur->setsCourriel($_POST['sCourriel']);
+            $oUtilisateur->setsCourriel($_POST['sCourriel']);
+            $oUtilisateur->setsTheme($_POST['sTheme']);
+            $oUtilisateur->setsMoteurRecherche($_POST['sMoteurRecherche']);
+            $oUtilisateur->setsSources($_POST['sSources']);
+
+
+            if(file_exists($_FILES['sAvatar']['tmp_name']) || is_uploaded_file($_FILES['sAvatar']['tmp_name'])){
+                // Téléverser l'image
+                $aInfo = $oUtilisateur->televerserPhoto();
+
+                if($aInfo["erreur"] == false){
+                    $oUtilisateur->setsAvatar($aInfo["sInfo"]);
+                }
+                else{
+                    $sMsg = $aInfo['sInfo'];
+                }
+            }
+
+            if(empty($_POST['sMotDePasse']) == false){
+                $oUtilisateur->setsMotDePasse($_POST['sMotDePasse']);
+            }
 
             if($oUtilisateur->modifier()){
-                $sMsg = "
+                $sMsg = "Les modifications ont été sauvegardées!";
+                $sAlerte = "
                     <div class='flex-container alerte' data-opt='success'>
                         <span><i class='fas fa-check-circle'></i></span>
-                        <p>Les modifications ont été sauvegardées!</p>
+                        <p>". $sMsg ."</p>
                     </div>";
             }
             else{
-                $sMsg = "
+                if(empty($sMsg)){
+                    $sMsg = "Erreur : Les modifications n'ont pas été sauvegardées!";
+                }
+
+                $sAlerte = "
                     <div class='flex-container alerte' data-opt='error'>
                         <span><i class='fas fa-exclamation-circle'></i></span>
-                        <p>Erreur : Les modifications n'ont pas été sauvegardées!</p>
+                        <p>". $sMsg ."</p>
                     </div>";
             }
 
-            $oVueUtilisateur->adm_afficherProfil($oUtilisateur, $sMsg);
+            $oVueUtilisateur->adm_afficherProfil($oUtilisateur, $sAlerte);
         }
 
     }
