@@ -6,6 +6,28 @@
  * Time: 17:13
  */
 
+// Afficher les erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+/* ========================================================================================== */
+
+// Définir le fuseau horaire à Toronto
+date_default_timezone_set('America/Toronto');
+
+/* ========================================================================================== */
+
+// Controleur
+require('controleur/Controleur.class.php');
+
+// Require Modèles / Vues / Lib
+require('lib/Autoloader.class.php');
+spl_autoload_register('autoload');
+
+/* ========================================================================================== */
+
+session_start();
 ?>
 
 <!doctype html>
@@ -26,70 +48,87 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<header>
-    <div>
-        <a href="index.php"><i class="fas fa-arrow-left"></i> Retour</a>
-    </div>
-    <div>
-        <h1>Paramètres</h1>
-        <p>Choisissez les paramètres qui vous définissent le mieux.</p>
-    </div>
-</header>
-
-<form action="setting.php" method="post">
-    <div>
+<main class="flex-container">
+    <header>
         <div>
-            <h2>Langue</h2>
+            <a href="index.php"><i class="fas fa-arrow-left"></i> Retour</a>
         </div>
         <div>
-            <select name="" id="">
-                <option value="fr">Français</option>
-            </select>
+            <h1>Paramètres</h1>
+            <p>Choisissez les paramètres qui vous définissent le mieux.</p>
         </div>
-    </div>
+    </header>
 
-    <div>
-        <div>
-            <h2>Thème</h2>
-        </div>
-        <div>
-            <select name="" id="">
-                <option value="auto">Automatique</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
-        </div>
-    </div>
+    <?php
 
-    <div id="info">
-        <div>
-            <h2>Informations</h2>
-        </div>
-        <div>
-            <div>
-                <label for=""><i class="fas fa-user"></i></label>
-                <input type="text" placeholder="Prénom">
-            </div>
+    try{
+        $oVueUtilisateur = new VueUtilisateur();
+        $oUtilisateur = new Utilisateur($_SESSION['connexion']);
+        $oUtilisateur->rechercherUn();
+        $sAlerte = "";
+        $sMsg = "";
 
-            <div>
-                <label for=""><i class="fas fa-user"></i></label>
-                <input type="text" placeholder="Nom">
-            </div>
-            <div>
-                <label for=""><i class="fas fa-envelope"></i></label>
-                <input type="email" placeholder="Courriel">
-            </div>
-            <div>
-                <label for=""><i class="fas fa-lock"></i></label>
-                <input type="password" placeholder="Mot de passe">
-            </div>
-        </div>
-    </div>
-    <input type="submit" name="cmd" value="Sauvegarder">
+        if(isset($_POST['cmd']) == false){
+            $oVueUtilisateur->adm_afficherProfil($oUtilisateur);
+        }
+        else{
 
-</form>
+            $oUtilisateur->setsNom($_POST['sNom']);
+            $oUtilisateur->setsPrenom($_POST['sPrenom']);
+            $oUtilisateur->setsCourriel($_POST['sCourriel']);
+            $oUtilisateur->setsCourriel($_POST['sCourriel']);
+            $oUtilisateur->setsTheme($_POST['sTheme']);
+            $oUtilisateur->setsMoteurRecherche($_POST['sMoteurRecherche']);
+            $oUtilisateur->setsSources($_POST['sSources']);
 
+
+            if(file_exists($_FILES['sAvatar']['tmp_name']) || is_uploaded_file($_FILES['sAvatar']['tmp_name'])){
+                // Téléverser l'image
+                $aInfo = $oUtilisateur->televerserPhoto();
+
+                if($aInfo["erreur"] == false){
+                    $oUtilisateur->setsAvatar($aInfo["sInfo"]);
+                }
+                else{
+                    $sMsg = $aInfo['sInfo'];
+                }
+            }
+
+            if(empty($_POST['sMotDePasse']) == false){
+                $oUtilisateur->setsMotDePasse($_POST['sMotDePasse']);
+            }
+
+            if($oUtilisateur->modifier()){
+                $sMsg = "Les modifications ont été sauvegardées!";
+                $sAlerte = "
+                    <div class='flex-container alerte' data-opt='success'>
+                        <span><i class='fas fa-check-circle'></i></span>
+                        <p>". $sMsg ."</p>
+                    </div>";
+            }
+            else{
+                if(empty($sMsg)){
+                    $sMsg = "Erreur : Les modifications n'ont pas été sauvegardées!";
+                }
+
+                $sAlerte = "
+                    <div class='flex-container alerte' data-opt='error'>
+                        <span><i class='fas fa-exclamation-circle'></i></span>
+                        <p>". $sMsg ."</p>
+                    </div>";
+            }
+
+            $oVueUtilisateur->adm_afficherProfil($oUtilisateur, $sAlerte);
+        }
+
+    }
+    catch (Exception $oException){
+        echo "<p>". $oException->getMessage() ."</p>";
+    }
+
+    ?>
+
+</main>
 
 </body>
 </html>

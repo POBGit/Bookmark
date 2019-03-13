@@ -8,7 +8,7 @@ class VuePage
      * @param void
      * @return void
      */
-    public function getHead()
+    public function getHead(Utilisateur $oUtilisateur)
     {
         $sHeader = '<!doctype html>
             <html lang="fr">
@@ -27,9 +27,28 @@ class VuePage
                 <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700,900" rel="stylesheet">
                 
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-            </head>
-            
-            <body class="dark">';
+            </head>';
+
+        $sClasseTheme = "";
+
+        if($oUtilisateur->getsTheme() == "auto"){
+            $sHeure = date("H");
+
+            if($sHeure >= 7 && $sHeure < 20 ){
+                $sClasseTheme = "";
+            }
+            else{
+                $sClasseTheme = "dark";
+            }
+        }
+        else if($oUtilisateur->getsTheme() == "dark"){
+            $sClasseTheme = "dark";
+        }
+        else{
+            $sClasseTheme = "";
+        }
+
+        $sHeader .= "<body class='". $sClasseTheme ."'>";
 
         echo $sHeader;
     } // fin ()

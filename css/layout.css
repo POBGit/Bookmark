@@ -117,10 +117,13 @@ header #search span {
     margin-left: 35px;
     color: var(--main-texte-gris-1);
 }
+header #search form{
+    flex: 1 1 0;
+}
 
 header #search input[type=text] {
     display: block;
-    flex: 1 1 0;
+    width: 100%;
     height: 50px;
     margin-left: 35px;
     border: none;
@@ -142,6 +145,9 @@ header #user img {
     height: 35px;
     border-radius: 50%;
     margin-left: 25px;
+}
+header #user p{
+    color: var(--main-texte-gris-h2);
 }
 
 header #settings {
@@ -496,43 +502,6 @@ header #settings a {
     color: var(--main-texte-gris-sous-titre);
     margin-right: 20px;
 }
-
-/* === ALERTES === */
-.alerte {
-    position: fixed;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    align-items: center;
-    padding: 10px 15px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
-
-}
-
-.alerte>span {
-    margin-right: 10px;
-}
-
-.alerte[data-opt=success] {
-    border-left: 5px solid var(--alerte-vert-fonce);
-    color: var(--alerte-vert-fonce);
-    background-color: var(--alerte-vert-pale);
-}
-
-.alerte[data-opt=warning] {
-    border-left: 5px solid var(--alerte-jaune-fonce);
-    color: var(--alerte-jaune-fonce);
-    background-color: var(--alerte-jaune-pale);
-}
-
-.alerte[data-opt=error] {
-    border-left: 5px solid var(--alerte-rouge-fonce);
-    color: var(--alerte-rouge-fonce);
-    background-color: var(--alerte-rouge-pale);
-}
-
 
 /* === MODAL === */
 .modal {

@@ -7,6 +7,8 @@
 class Controleur
 {
 
+    private $oUtilisateur;
+
     /**
      * Gérer l'affichage du site
      *
@@ -21,12 +23,16 @@ class Controleur
 
             $oVuePage = new VuePage();
 
+            // Récupérer l'ID de l'utilisateur de la Session dans le fichier Index.php
+            $this->oUtilisateur = new Utilisateur($_SESSION['connexion']);
+            $this->oUtilisateur->rechercherUn();
+
             /* ========================================================================================== */
             /* HEAD DE LA PAGE */
             /* ========================================================================================== */
 
             // Afficher le HEAD de la page
-            $oVuePage->getHead();
+            $oVuePage->getHead($this->oUtilisateur);
 
             /* ========================================================================================== */
             /* NAV DE LA PAGE */
@@ -114,13 +120,10 @@ class Controleur
     public function gererAfficherHeader()
     {
         try {
-            // Recherche un utilisateur 
-            $oUtilisateur = new Utilisateur(2);
-            $oUtilisateur->rechercherUn();
 
             $oVueUtilisateur = new VueUtilisateur();
 
-            $oVueUtilisateur->afficherNav($oUtilisateur);
+            $oVueUtilisateur->afficherNav($this->oUtilisateur);
         } catch (Exception $oException) {
             echo "<p>" . $oException->getMessage() . "</p>";
         }
@@ -156,10 +159,9 @@ class Controleur
     public function gererAfficherEvenements()
     {
         try {
-            $oUtilisateur = new Utilisateur(2);
             $oVueEvenement = new VueEvenement();
             $oEvenement = new Evenement();
-            $oEvenement->setoUtilisateur($oUtilisateur);
+            $oEvenement->setoUtilisateur($this->oUtilisateur);
             $aoEvenements = $oEvenement->rechercherTousAuj();
 
             $oVueEvenement->afficherTousAuj($aoEvenements);
@@ -178,10 +180,9 @@ class Controleur
     public function gererAfficherTaches()
     {
         try {
-            $oUtilisateur = new Utilisateur(2);
             $oVueTache = new VueTache();
             $oTache = new Tache();
-            $oTache->setoUtilisateur($oUtilisateur);
+            $oTache->setoUtilisateur($this->oUtilisateur);
 
             $aoTaches = $oTache->rechercherTousParUtilisateur();
 
@@ -257,8 +258,6 @@ class Controleur
             $oVueNouvelle = new VueNouvelle();
             $aoNouvelles = $oNouvelle->rechercherActualite();
 
-            //$aoNouvelles = array();
-
             $oVueNouvelle->afficherTousNouvelles($aoNouvelles);
         } catch (Exception $oException) {
             echo "<p>" . $oException->getMessage() . "</p>";
@@ -305,8 +304,6 @@ class Controleur
     public function gererAfficherModal()
     {
         try {
-            $oUtilisateur = new Utilisateur(2);
-            $oUtilisateur->rechercherUn();
             $oVueModal = new VueModal();
 
             $oVueModal->afficherModalTache();
