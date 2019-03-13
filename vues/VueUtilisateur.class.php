@@ -8,6 +8,25 @@
 
 class VueUtilisateur {
 
+    private $aLangue = array(
+        array("sNomLangue" => "Français", "sValeur" => "fr")
+    );
+    private $aTheme = array(
+        array("sNomTheme" => "Automatique", "sValeur" => "auto"),
+        array("sNomTheme" => "Light", "sValeur" => "light"),
+        array("sNomTheme" => "Dark", "sValeur" => "dark")
+    );
+    private $aMoteurRecherche = array(
+        array("sNomMoteur" => "Google", "sValeur" => "google"),
+        array("sNomMoteur" => "DuckDuckGo", "sValeur" => "duckduckgo"),
+        array("sNomMoteur" => "Yahoo!", "sValeur" => "yahoo"),
+        array("sNomMoteur" => "Bing", "sValeur" => "bing"),
+        array("sNomMoteur" => "Écosia", "sValeur" => "ecosia")
+    );
+    private $aSources = array(
+        array("sNomSource" => "Google News", "sValeur" => "google")
+    );
+
     /**
      * Afficher le Header avec le nom de l'utilisateur
      *
@@ -15,13 +34,18 @@ class VueUtilisateur {
      */
     public function afficherNav(Utilisateur $oUtilisateur) {
 
+        $iMoteur = 0;
+        while($iMoteur < count($this->aMoteurRecherche) && $oUtilisateur->getsMoteurRecherche() != $this->aMoteurRecherche[$iMoteur]['sValeur']){
+            $iMoteur++;
+        }
+
         $sHtml = "
         <main class='flex-container'>
             <header class='flex-container'>
                 <div id='search'>
                     <span><i class='fas fa-search'></i></span>
                     <form action='http://www.google.com/search' method='get'> 
-                        <input type='text' name='q' placeholder='Rechercher sur Google' required autocomplete='off'>
+                        <input type='text' name='q' placeholder='Rechercher sur " . $this->aMoteurRecherche[$iMoteur]['sNomMoteur'] . "' required autocomplete='off'>
                         </form>
                 </div>
                 <div id='user' class='flex-container'>
@@ -43,28 +67,9 @@ class VueUtilisateur {
 
     public function adm_afficherProfil(Utilisateur $oUtilisateur, $sMsg = "") {
 
-        $aLangue = array(
-            array("sNomLangue" => "Français", "sValeur" => "fr")
-        );
-        $aTheme = array(
-            array("sNomTheme" => "Automatique", "sValeur" => "auto"),
-            array("sNomTheme" => "Light", "sValeur" => "light"),
-            array("sNomTheme" => "Dark", "sValeur" => "dark")
-        );
-        $aMoteurRecherche = array(
-            array("sNomMoteur" => "Google", "sValeur" => "google"),
-            array("sNomMoteur" => "DuckDuckGo", "sValeur" => "duckduckgo"),
-            array("sNomMoteur" => "Yahoo!", "sValeur" => "yahoo"),
-            array("sNomMoteur" => "Bing", "sValeur" => "bing"),
-            array("sNomMoteur" => "Écosia", "sValeur" => "ecosia")
-        );
-        $aSources = array(
-            array("sNomSource" => "Google News", "sValeur" => "google")
-        );
-
         $sHtml = "";
 
-        if(empty($sMsg) == false){
+        if (empty($sMsg) == false) {
             $sHtml .= $sMsg;
         }
 
@@ -79,12 +84,12 @@ class VueUtilisateur {
                     <select name='sLangue' id='sLangue'>";
 
         // Afficher les options de langues et cocher le choix de l'utilisateur
-        for ($i = 0; $i < count($aLangue); $i++) {
+        for ($i = 0; $i < count($this->aLangue); $i++) {
             $select = "";
-            if ($oUtilisateur->getsLangue() == $aLangue[$i]['sValeur']) {
+            if ($oUtilisateur->getsLangue() == $this->aLangue[$i]['sValeur']) {
                 $select = "selected";
             }
-            $sHtml .= "<option value='" . $aLangue[$i]['sValeur'] . "' " . $select . ">" . $aLangue[$i]['sNomLangue'] . "</option>";
+            $sHtml .= "<option value='" . $this->aLangue[$i]['sValeur'] . "' " . $select . ">" . $this->aLangue[$i]['sNomLangue'] . "</option>";
         }
 
         $sHtml .= "
@@ -100,12 +105,12 @@ class VueUtilisateur {
                     <select name='sTheme' id='sTheme'>";
 
         // Afficher les options de thème et cocher le choix de l'utilisateur
-        for ($i = 0; $i < count($aTheme); $i++) {
+        for ($i = 0; $i < count($this->aTheme); $i++) {
             $select = "";
-            if ($oUtilisateur->getsTheme() == $aTheme[$i]['sValeur']) {
+            if ($oUtilisateur->getsTheme() == $this->aTheme[$i]['sValeur']) {
                 $select = "selected";
             }
-            $sHtml .= "<option value='" . $aTheme[$i]['sValeur'] . "' " . $select . ">" . $aTheme[$i]['sNomTheme'] . "</option>";
+            $sHtml .= "<option value='" . $this->aTheme[$i]['sValeur'] . "' " . $select . ">" . $this->aTheme[$i]['sNomTheme'] . "</option>";
         }
 
         $sHtml .= "
@@ -121,12 +126,12 @@ class VueUtilisateur {
                     <select name='sMoteurRecherche' id='sMoteurRecherche'>";
 
         // Afficher les options de moteur de recherche et cocher le choix de l'utilisateur
-        for ($i = 0; $i < count($aMoteurRecherche); $i++) {
+        for ($i = 0; $i < count($this->aMoteurRecherche); $i++) {
             $select = "";
-            if ($oUtilisateur->getsMoteurRecherche() == $aMoteurRecherche[$i]['sValeur']) {
+            if ($oUtilisateur->getsMoteurRecherche() == $this->aMoteurRecherche[$i]['sValeur']) {
                 $select = "selected";
             }
-            $sHtml .= "<option value='" . $aMoteurRecherche[$i]['sValeur'] . "' " . $select . ">" . $aMoteurRecherche[$i]['sNomMoteur'] . "</option>";
+            $sHtml .= "<option value='" . $this->aMoteurRecherche[$i]['sValeur'] . "' " . $select . ">" . $this->aMoteurRecherche[$i]['sNomMoteur'] . "</option>";
         }
 
         $sHtml .= "
@@ -142,12 +147,12 @@ class VueUtilisateur {
                     <select name='sSources' id='sSources'>";
 
         // Afficher les options de sources d'actualité et cocher le choix de l'utilisateur
-        for ($i = 0; $i < count($aSources); $i++) {
+        for ($i = 0; $i < count($this->aSources); $i++) {
             $select = "";
-            if ($oUtilisateur->getsSources() == $aSources[$i]['sValeur']) {
+            if ($oUtilisateur->getsSources() == $this->aSources[$i]['sValeur']) {
                 $select = "selected";
             }
-            $sHtml .= "<option value='" . $aSources[$i]['sValeur'] . "' " . $select . ">" . $aSources[$i]['sNomSource'] . "</option>";
+            $sHtml .= "<option value='" . $this->aSources[$i]['sValeur'] . "' " . $select . ">" . $this->aSources[$i]['sNomSource'] . "</option>";
         }
 
         $sHtml .= "

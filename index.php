@@ -26,6 +26,9 @@ spl_autoload_register('autoload');
 
 /* ========================================================================================== */
 
+session_start();
+$_SESSION['connexion'] = 2;
+
 try {
     $oControleur = new Controleur();
 

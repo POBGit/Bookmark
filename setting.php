@@ -27,6 +27,7 @@ spl_autoload_register('autoload');
 
 /* ========================================================================================== */
 
+session_start();
 ?>
 
 <!doctype html>
@@ -62,7 +63,7 @@ spl_autoload_register('autoload');
 
     try{
         $oVueUtilisateur = new VueUtilisateur();
-        $oUtilisateur = new Utilisateur(1);
+        $oUtilisateur = new Utilisateur($_SESSION['connexion']);
         $oUtilisateur->rechercherUn();
         $sAlerte = "";
         $sMsg = "";
