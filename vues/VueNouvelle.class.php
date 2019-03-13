@@ -6,7 +6,8 @@
  * Time: 16:20
  */
 
-class VueNouvelle {
+class VueNouvelle
+{
 
     /**
      * Afficher toutes les nouvelles
@@ -15,16 +16,17 @@ class VueNouvelle {
      *
      * @return void
      */
-    public function afficherTousNouvelles($aoNouvelles, $sMsg = "") {
+    public function afficherTousNouvelles($aoNouvelles, $sMsg = "")
+    {
         $sHtml = "<div id='nouvelles'>
                 <h2>Nouvelles</h2>
                 <div id='news-container' class='div-content'>";
 
-        for($i=0; $i<count($aoNouvelles); $i++){
+        for ($i = 0; $i < count($aoNouvelles); $i++) {
             $sHtml .= "
                     <div class='item news-item'>
-                        <span>". $aoNouvelles[$i]->getsSource() ."</span>
-                        <a href='". $aoNouvelles[$i]->getsLien() ."'>". $aoNouvelles[$i]->getsTitre() ."</a>
+                        <span>" . $aoNouvelles[$i]->getsSource() . "</span>
+                        <a href='" . $aoNouvelles[$i]->getsLien() . "'>" . $aoNouvelles[$i]->getsTitre() . "</a>
                     </div>";
         }
 
@@ -42,7 +44,8 @@ class VueNouvelle {
      *
      * @return void
      */
-    public function afficherTousBourse() {
+    public function afficherTousBourse()
+    {
         $sHtml = "
             <div id='bourse'>
                 <h2>Bourse</h2>

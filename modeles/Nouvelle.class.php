@@ -1,7 +1,8 @@
 <?php
 
 // Classe où l'on retire les dernières nouvelles 
-class Nouvelle {
+class Nouvelle
+{
 
     private $sTitre;
     private $sLien;
@@ -9,19 +10,22 @@ class Nouvelle {
 
     /* =============================================================================================== */
 
-    public function setsTitre($sTitre) {
+    public function setsTitre($sTitre)
+    {
         TypeException::estChaineDeCaracteres($sTitre);
 
         $this->sTitre = $sTitre;
     }
 
-    public function setsLien($sLien) {
+    public function setsLien($sLien)
+    {
         TypeException::estChaineDeCaracteres($sLien);
 
         $this->sLien = $sLien;
     }
 
-    public function setsSource($sSource) {
+    public function setsSource($sSource)
+    {
         TypeException::estChaineDeCaracteres($sSource);
 
         $this->sSource = $sSource;
@@ -29,21 +33,25 @@ class Nouvelle {
 
     /* =============================================================================================== */
 
-    public function getsTitre() {
+    public function getsTitre()
+    {
         return $this->sTitre;
     }
 
-    public function getsLien() {
+    public function getsLien()
+    {
         return $this->sLien;
     }
 
-    public function getsSource() {
+    public function getsSource()
+    {
         return $this->sSource;
     }
 
     /* =============================================================================================== */
 
-    public function __construct($sTitre = "", $sLien = "", $sSource = "") {
+    public function __construct($sTitre = "", $sLien = "", $sSource = "")
+    {
         $this->setsTitre($sTitre);
         $this->setsLien($sLien);
         $this->setsSource($sSource);
@@ -56,7 +64,8 @@ class Nouvelle {
      * @param void
      * @return $aoNouvelles
      */
-    public function rechercherActualite() {
+    public function rechercherActualite()
+    {
         $xml = ("https://news.google.com/rss?topic=h&hl=fr-CA&gl=CA&ceid=CA:fr");
 
         $xmlDoc = new DOMDocument();
@@ -77,5 +86,4 @@ class Nouvelle {
 
         return $aoNouvelles;
     }
-
 } // fin classe
