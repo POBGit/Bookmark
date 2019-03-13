@@ -31,7 +31,7 @@ class VueUtilisateur
                     <img src='medias/" . $oUtilisateur->getsAvatar() . "' alt=''>
                 </div>
                 <div id='settings'>
-                    <a href='#'><i class='fas fa-cog'></i></a>
+                    <a href='setting.php'><i class='fas fa-cog'></i></a>
                 </div>
             </header>
             
